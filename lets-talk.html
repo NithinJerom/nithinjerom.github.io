@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's Talk | TRX — Thinkronex</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #08080b;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      padding: 22px 7%;
+      border-bottom: 1px solid #24212c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #a970ff;
+    }
+
+    .back-link {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 680px;
+      margin: auto;
+      padding: 65px 25px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      color: #b98aff;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
+
+    .intro p {
+      color: #888;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .progress-track {
+      height: 3px;
+      width: 100%;
+      background: #28232f;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: #a970ff;
+      transition: width .35s ease;
+    }
+
+    .step {
+      display: none;
+      animation: appear .35s ease;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-number {
+      color: #a970ff;
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 13px;
+    }
+
+    h2 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .step-description {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      color: #ccc;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      background: #101014;
+      color: white;
+      border: 1px solid #302a39;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border .2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #a970ff;
+      box-shadow: 0 0 12px rgba(169,112,255,.12);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .choice {
+      position: relative;
+    }
+
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .choice label {
+      display: flex;
+      align-items: center;
+      min-height: 58px;
+      padding: 14px;
+      border: 1px solid #302a39;
+      border-radius: 8px;
+      background: #101014;
+      color: #bbb;
+      cursor: pointer;
+      margin: 0;
+      font-size: 13px;
+      transition: .2s;
+    }
+
+    .choice input:checked + label {
+      border-color: #a970ff;
+      background: rgba(169,112,255,.12);
+      color: #fff;
+      box-shadow: 0 0 13px rgba(169,112,255,.12);
+    }
+
+    .choice label:hover {
+      border-color: #8060aa;
+    }
+
+    .choice input:focus-visible + label {
+      outline: 2px solid #a970ff;
+      outline-offset: 3px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 13px 24px;
+      border-radius: 7px;
+      transition: .25s;
+    }
+
+    .next-btn, .submit-btn {
+      color: white;
+      background: #9255e9;
+      box-shadow: 0 0 15px rgba(169,112,255,.2);
+      margin-left: auto;
+    }
+
+    .next-btn:hover, .submit-btn:hover {
+      background: #a970ff;
+      box-shadow: 0 0 22px rgba(169,112,255,.4);
+      transform: translateY(-2px);
+    }
+
+    .prev-btn {
+      background: transparent;
+      border: 1px solid #38313f;
+      color: #aaa;
+    }
+
+    .prev-btn:hover {
+      color: white;
+      border-color: #a970ff;
+    }
+
+    .note {
+      color: #666;
+      font-size: 11px;
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 10px;
+      padding: 20px;
+      border-top: 1px solid #24212c;
+    }
+
+    @media (max-width: 500px) {
+      main {
+        padding: 45px 20px;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">TRX<span>.</span></a>
+  <a href="index.html" class="back-link">← Back to website</a>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="eyebrow">START A PROJECT</div>
+    <h1>Let's build something.</h1>
+    <p>Have an idea? Tell us about it. Let's turn it into something meaningful.</p>
+  </div>
+
+  
+<form id="projectForm" novalidate>
+      
+
+    <div class="progress-info">
+      <span id="stepLabel">STEP 01 OF 05</span>
+      <span id="progressPercent">20%</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    
+<!-- STEP 1 -->
+<section class="step active">
+  <div class="step-number">01 / YOUR INTRODUCTION</div>
+  <h2>What's your name?</h2>
+  <p class="step-description">Let's start with a little introduction.</p>
+
+  <label for="name">Your full name</label>
+  <input id="name" name="user_name" type="text"
+         placeholder="Enter your name"
+         autocomplete="name" required>
+</section>
+
+
+    
+<!-- STEP 2 -->
+<section class="step">
+  <div class="step-number">02 / CONTACT DETAILS</div>
+  <h2>How can we reach you?</h2>
+  <p class="step-description">Where should we send our response?</p>
+
+  <label for="email">Your email address</label>
+  <input id="email" name="user_email" type="email"
+         placeholder="you@example.com"
+         autocomplete="email" required>
+</section>
+
+
+    
+    
+<!-- STEP 3 -->
+<section class="step">
+  <div class="step-number">03 / YOUR PROJECT</div>
+  <h2>What do you want to build?</h2>
+  <p class="step-description">Choose the service that best matches your idea.</p>
+
+  <div class="choices">
+    <div class="choice">
+      <input id="website" type="radio" name="project_type"
+             value="Website" required>
+      <label for="website">Website Development</label>
+    </div>
+
+    <div class="choice">
+      <input id="ai" type="radio" name="project_type" value="AI Product">
+      <label for="ai">AI Product</label>
+    </div>
+
+    <div class="choice">
+      <input id="saas" type="radio" name="project_type" value="SaaS Platform">
+      <label for="saas">SaaS Platform</label>
+    </div>
+
+    <div class="choice">
+      <input id="mobile" type="radio" name="project_type" value="Mobile App">
+      <label for="mobile">Mobile Application</label>
+    </div>
+
+    <div class="choice">
+      <input id="design" type="radio" name="project_type" value="UI/UX Design">
+      <label for="design">UI / UX Design</label>
+    </div>
+
+    <div class="choice">
+      <input id="other" type="radio" name="project_type" value="Other">
+      <label for="other">Something Else</label>
+    </div>
+  </div>
+</section>
+
+
+  
+    
+<!-- STEP 4 -->
+<section class="step">
+  <div class="step-number">04 / PROJECT BUDGET</div>
+  <h2>What's your estimated budget?</h2>
+  <p class="step-description">This helps us understand the scope of your project.</p>
+
+  <div class="choices">
+    <div class="choice">
+      <input id="budget1" type="radio" name="budget"
+             value="$5 – $15" required>
+      <label for="budget1">$5 – $15</label>
+    </div>
+
+    <div class="choice">
+      <input id="budget2" type="radio" name="budget"
+             value="$15 – $30">
+      <label for="budget2">$15 – $30</label>
+    </div>
+
+    <div class="choice">
+      <input id="budget3" type="radio" name="budget"
+             value="$30 – $65">
+      <label for="budget3">$30 – $65</label>
+    </div>
+
+    <div class="choice">
+      <input id="budget4" type="radio" name="budget"
+             value="Not sure yet">
+      <label for="budget4">Not sure yet</label>
+    </div>
+  </div>
+</section>
+
+
+    
+    
+<!-- STEP 5 -->
+<section class="step">
+  <div class="step-number">05 / PROJECT DETAILS</div>
+  <h2>Tell us about your idea.</h2>
+  <p class="step-description">Share your goals, requirements and anything else we should know.</p>
+
+  <label for="details">Project description</label>
+  <textarea id="details" name="project_details"
+            placeholder="I'd like to build..."
+            required></textarea>
+</section>
+
+    <div class="buttons">
+      <button type="button" class="prev-btn" id="prevBtn" hidden>
+        ← Back
+      </button>
+
+      <button type="button" class="next-btn" id="nextBtn">
+        Continue →
+      </button>
+
+      <button type="submit" class="submit-btn" id="submitBtn" hidden>
+        Send Enquiry ↗
+      </button>
+    </div>
+
+  </form>
+
+  <p class="note">Your project information will only be used to respond to your enquiry.</p>
+</main>
+
+<footer>
+  © 2026 TRX — Thinkronex. All Rights Reserved.
+</footer>
+
+
+<!-- EmailJS library: load this before your form JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  // Initialize EmailJS
+  emailjs.init({
+    publicKey: "uKJHOkI2ZwThJst85"
+  });
+
+  const form = document.getElementById("projectForm");
+  const steps = document.querySelectorAll(".step");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const progressFill = document.getElementById("progressFill");
+  const stepLabel = document.getElementById("stepLabel");
+  const progressPercent = document.getElementById("progressPercent");
+
+  let currentStep = 0;
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle("active", i === index);
+    });
+
+    currentStep = index;
+
+    const percent = ((index + 1) / steps.length) * 100;
+    progressFill.style.width = percent + "%";
+    stepLabel.textContent = `STEP 0${index + 1} OF 05`;
+    progressPercent.textContent = percent + "%";
+
+    prevBtn.hidden = index === 0;
+    nextBtn.hidden = index === steps.length - 1;
+    submitBtn.hidden = index !== steps.length - 1;
+  }
+
+  function validateStep() {
+    const fields = steps[currentStep].querySelectorAll("input, textarea");
+
+    for (const field of fields) {
+      if (!field.checkValidity()) {
+        field.reportValidity();
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (!validateStep()) return;
+
+    if (currentStep < steps.length - 1) {
+      showStep(currentStep + 1);
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentStep > 0) {
+      showStep(currentStep - 1);
+    }
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // Validate all steps
+    for (let i = 0; i < steps.length; i++) {
+      const fields = steps[i].querySelectorAll("input, textarea");
+
+      for (const field of fields) {
+        if (!field.checkValidity()) {
+          showStep(i);
+          field.reportValidity();
+          return;
+        }
+      }
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      await emailjs.sendForm(
+        "service_d42q71p",
+        "template_qp4v92p",
+        form
+      );
+
+      submitBtn.disabled = false;
+submitBtn.textContent = "Send Enquiry ↗";
+
+form.reset();
+
+document.getElementById("successOverlay").classList.add("show");
+
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      alert("Your enquiry could not be sent. Please try again.");
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Enquiry ↗";
+    }
+  });
+
+  // Show the first step
+  showStep(0);
+</script>
+
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="mail-animation">
+      <div class="mail-glow"></div>
+      <div class="mail-icon">✉</div>
+      <div class="mail-particle">✦</div>
+    </div>
+
+    <h2>Enquiry Sent!</h2>
+    <p>Thank you for reaching out to Thinkronex.</p>
+    <span>We'll get back to you soon.</span>
+
+    <a href="index.html" class="success-home">Back to Home ↗</a>
+  </div>
+</div>
+
+</body>
+
+
+
+</html>
