@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products | TRX — Thinkronex</title>
+    <meta name="description" content="Discover digital products, software solutions and innovative ideas by TRX Thinkronex.">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* PRODUCTS PAGE */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #08080b;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .products-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        .products-nav {
+            width: 100%;
+            padding: 24px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .products-logo {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .products-logo span {
+            color: #a970ff;
+        }
+
+        .products-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .products-links a {
+            font-size: 13px;
+            color: #aaa;
+            transition: 0.3s;
+        }
+
+        .products-links a:hover,
+        .products-links a.active {
+            color: #b98aff;
+        }
+
+        /* HERO */
+
+        .products-hero {
+            min-height: 490px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px;
+        }
+
+        .products-hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #8b3dff;
+            filter: blur(180px);
+            opacity: 0.18;
+            border-radius: 50%;
+            top: -220px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-label {
+            color: #b98aff;
+            letter-spacing: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .products-hero h1 {
+            font-size: clamp(40px, 7vw, 76px);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .products-hero h1 span {
+            background: linear-gradient(90deg, #ffffff, #a970ff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .products-hero p {
+            color: #999;
+            line-height: 1.8;
+            font-size: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 15px 28px;
+            border-radius: 8px;
+            background: #a970ff;
+            color: #08080b;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #ffffff;
+            transform: translateY(-4px);
+        }
+
+        /* SECTION COMMON */
+
+        .products-section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 45px;
+        }
+
+        .section-heading small {
+            color: #a970ff;
+            letter-spacing: 3px;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin-top: 15px;
+        }
+
+        .section-heading p {
+            color: #888;
+            font-size: 14px;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        /* PRODUCT CATEGORIES */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .category-card {
+            background: #111116;
+            border: 1px solid #24212c;
+            padding: 25px 17px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-7px);
+            border-color: #a970ff;
+            box-shadow: 0 10px 35px #a970ff15;
+        }
+
+        .category-icon {
+            font-size: 27px;
+            margin-bottom: 18px;
+        }
+
+        .category-card h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: #888;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* FEATURED PRODUCTS */
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #101015;
+            border: 1px solid #27232f;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #a970ff;
+        }
+
+        .product-visual {
+            min-height: 190px;
+            background:
+                radial-gradient(circle at 50% 50%, #7336b633, transparent 65%),
+                linear-gradient(135deg, #17121f, #0c0c11);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 55px;
+        }
+
+        .product-info {
+            padding: 27px;
+        }
+
+        .product-status {
+            display: inline-block;
+            padding: 7px 11px;
+            border-radius: 30px;
+            background: #a970ff18;
+            color: #bd94ff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .product-info h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .product-info p {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-stack span {
+            padding: 7px 10px;
+            background: #1a1920;
+            border: 1px solid #302b38;
+            border-radius: 5px;
+            color: #bbb;
+            font-size: 10px;
+        }
+
+        /* VISION SECTION */
+
+        .vision-box {
+            padding: 70px 30px;
+            text-align: center;
+            border-radius: 18px;
+            border: 1px solid #33234a;
+            background:
+                radial-gradient(circle at center, #8b3dff20, transparent 65%),
+                #101015;
+        }
+
+        .vision-box h2 {
+            font-size: clamp(28px, 5vw, 45px);
+            margin-bottom: 20px;
+        }
+
+        .vision-box h2 span {
+            color: #a970ff;
+        }
+
+        .vision-box p {
+            color: #999;
+            line-height: 1.8;
+            max-width: 620px;
+            margin: auto;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        .products-footer {
+            padding: 35px 5%;
+            border-top: 1px solid #24212c;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .products-footer strong {
+            color: #a970ff;
+        }
+
+        /* ANIMATION */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products-nav {
+                padding: 20px 5%;
+            }
+
+            .products-links {
+                gap: 13px;
+            }
+
+            .products-links a {
+                font-size: 10px;
+            }
+
+            .products-logo {
+                font-size: 21px;
+            }
+
+            .products-hero {
+                min-height: 420px;
+                padding: 75px 15px;
+            }
+
+            .products-section {
+                padding: 55px 0;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                padding: 20px 14px;
+            }
+
+            .vision-box {
+                padding: 50px 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .products-links {
+                gap: 8px;
+            }
+
+            .products-links a {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="products-nav">
+
+        <a href="index.html" class="products-logo">
+            TRX<span>.</span>
+        </a>
+
+        <div class="products-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <header class="products-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-label">TRX / PRODUCT STUDIO</div>
+
+            <h1>
+                Ideas Into Products.<br>
+                <span>Technology Into Impact.</span>
+            </h1>
+
+            <p>
+                Exploring ideas and building digital products that solve
+                real-world problems. From AI-powered applications to
+                modern software platforms, the journey starts here.
+            </p>
+
+            <a href="#featured" class="hero-button">
+                Explore Products ↗
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="products-container">
+
+        <!-- CATEGORIES -->
+        <section class="products-section reveal">
+
+            <div class="section-heading">
+                <small>WHAT WE BUILD</small>
+                <h2>Our Product Focus</h2>
+                <p>
+                    Exploring different areas of technology to create
+                    useful digital experiences.
+                </p>
+            </div>
+
+            <div class="category-grid">
+
+                <div class="category-card">
+                    <div class="category-icon">🌐</div>
+                    <h3>Web Applications</h3>
+                    <p>Modern and responsive web experiences.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">✦</div>
+                    <h3>AI Products</h3>
+                    <p>Intelligent tools and AI-powered solutions.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">⚡</div>
+                    <h3>Productivity Tools</h3>
+                    <p>Tools that help people work smarter.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">◈</div>
+                    <h3>SaaS Platforms</h3>
+                    <p>Scalable software for everyday needs.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">▣</div>
+                    <h3>Mobile Apps</h3>
+                    <p>Useful digital experiences on mobile.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURED PRODUCTS -->
+        <section class="products-section reveal" id="featured">
+
+            <div class="section-heading">
+                <small>SELECTED IDEAS & PROJECTS</small>
+                <h2>Featured Products</h2>
+                <p>
+                    A look at the products and ideas I am developing
+                    and exploring.
+                </p>
+            </div>
+
+            <div class="featured-grid">
+
+                <!-- KINDKART -->
+                <article class="product-card">
+
+                    <div class="product-visual">
+                        🛒
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-status">
+                            CONCEPT / IN DEVELOPMENT
+                        </span>
+
+                        <h3>KindKart</h3>
+
+                        <p>
+                            A student-focused donation platform that
+                            connects people who want to donate useful
+                            items with students who need them.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Express</span>
+                            <span>MongoDB</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- EXPENSE TRACKER -->
+                <article class="product-card">
+
+                    <div class="product-visual">
+                        📊
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-status">
+                            PERSONAL PROJECT
+                        </span>
+
+                        <h3>Expense Tracker</h3>
+
+                        <p>
+                            A simple finance management application
+                            designed to help users record expenses,
+                            organise spending and monitor their money.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FUTURE PRODUCT -->
+                <article class="product-card">
+
+                    <div class="product-visual">
+                        ✨
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-status">
+                            IDEA / EXPLORATION
+                        </span>
+
+                        <h3>AI Productivity Assistant</h3>
+
+                        <p>
+                            An idea for an intelligent assistant that
+                            could help users organise tasks, manage
+                            workflows and save time using AI.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span>AI</span>
+                            <span>Python</span>
+                            <span>Automation</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FUTURE SAAS -->
+                <article class="product-card">
+
+                    <div class="product-visual">
+                        🚀
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-status">
+                            FUTURE EXPLORATION
+                        </span>
+
+                        <h3>Next-Gen SaaS</h3>
+
+                        <p>
+                            Exploring ideas for scalable software
+                            platforms that can simplify business
+                            operations and solve everyday challenges.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span>SaaS</span>
+                            <span>Web Technology</span>
+                            <span>Cloud</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- VISION -->
+        <section class="products-section reveal">
+
+            <div class="vision-box">
+
+                <h2>
+                    Think Beyond.<br>
+                    <span>Build What Matters.</span>
+                </h2>
+
+                <p>
+                    My vision is to grow TRX into a global technology
+                    company by creating meaningful products,
+                    exploring new ideas and solving problems through
+                    innovation.
+                </p>
+
+                <a href="index.html#contact" class="hero-button">
+                    Let's Connect ↗
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="products-footer">
+
+        <p>
+            © 2026 <strong>TRX — Thinkronex.</strong>
+            Built with vision and curiosity.
+        </p>
+
+        <p>Think. Build. Innovate.</p>
+
+    </footer>
+
+
+    <!-- SCROLL ANIMATION -->
+    <script>
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        }, {
+            threshold: 0.12
+        });
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+
+</body>
+</html>
